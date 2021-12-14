@@ -17,6 +17,6 @@ export const postSecret = async (request: Request, response: Response) => {
 
   await createSecretService.execute(command);
 
-  const secret = await getSecret.byId(id, body.body, body.expiresIn);
+  const secret = await getSecret.byId(id);
   response.json(secret);
 };

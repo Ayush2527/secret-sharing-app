@@ -4,11 +4,12 @@ export class CreateSecret {
     public readonly password: string | null;
     public readonly expiresIn: string;
   
-    constructor({id, body, password, expiresIn}: CreateSecret) {
-    this.id = id;
-    this.body = body;
-    this.password = password;
-    this.expiresIn = expiresIn;
+    constructor(props: CreateSecret) {
+    // this.id = id;
+    // this.body = body;
+    // this.password = password;
+    // this.expiresIn = expiresIn;
+    Object.assign(this, props);
     }
   }
   
