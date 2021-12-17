@@ -1,5 +1,7 @@
 import request from 'supertest';
 import { AppFactory } from '../factory/app';
+import {createSecret} from '../factory/secret';
+import { v4 as uuid4 } from "uuid";
 
 describe('Secret e2e', () => {
   let app: AppFactory;
@@ -29,6 +31,20 @@ describe('Secret e2e', () => {
       }),
     );
   });
+
+  it('GET /secrets/:id fetch secret', async () =>{
+    const id = uuid4();
+    await createSecret({
+      id,
+      body: 'hello',
+      expiresIn: '1 hour',
+    });
+
+    const {body} = await request (app.instance)
+    .get(`/secrets/${id}`)
+    .send()
+    .expect(200);
+  })
 
   afterAll(async() => {
     await app.close();
